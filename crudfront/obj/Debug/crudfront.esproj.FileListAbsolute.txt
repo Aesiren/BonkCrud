@@ -1,0 +1,2 @@
+C:\Users\embon\Documents\Projects\BonkCrud\BonkCrud\crudfront\obj\Debug\crudfront.esproj.SuggestedBindingRedirects.cache
+C:\Users\embon\Documents\Projects\BonkCrud\BonkCrud\crudfront\obj\Debug\crudfront.esproj.CoreCompileInputs.cache
