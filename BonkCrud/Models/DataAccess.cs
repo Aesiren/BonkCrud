@@ -136,6 +136,19 @@ namespace BonkCrud.Models
             }
         }
 
+        public User GetUserData(int id)
+        {
+            try
+            {
+                User user = db.Users.Find(id);
+                return user;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
 
     }
 }
