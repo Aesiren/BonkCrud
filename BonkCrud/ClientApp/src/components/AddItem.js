@@ -1,19 +1,23 @@
-﻿import React from 'react';
+﻿import React, { Component } from 'react';
 import axios from 'axios';
 import '../AddItem.css'
+//import "./BonkCrud.data"
 import { Container, Col, Form, Row, FormGroup, Label, Input, Button } from 'reactstrap';
-class AddItem extends React.Component {
+
+export class AddItem extends Component {
+    static displayName = AddItem.name;
     constructor(props) {
         super(props)
         this.state = {
-            Name: '',
+            ItemName: '',
             Detail: '',
-            Quantity: ''
+            Quantity: '',
+            UserID: ''
             //TODO: add rest of Item table
         }
     }
     AddItem = () => {
-        axios.post('', { Name: this.state.name, Detail: this.state.Detail, Quantity: this.state.Quantity })
+        axios.post('https://localhost:44435/components/AddorUpdateItem/', { ItemName: this.state.ItemName, Detail: this.state.Detail, Quantity: this.state.Quantity })
             .then(json => {
                 if (json.data.Status === 'Success') {
                     console.log(json.data.status);
@@ -32,16 +36,16 @@ class AddItem extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    render() {
-        return (
-            <Container itemName="App">
+   render() {
+     return (
+           <Container itemName="App">
                 <h4 className="PageHeading">Enter Item Information</h4>
                 <Form itemName="form">
                     <Col>
                         <FormGroup row>
                             <Label for="name" sm={2}>Item Name</Label>
                             <col sm={10}>
-                                <Input type="text" name="Name" onChange={this.handleChange} value={this.state.Name} placeholder="Enter Name" />
+                                <Input type="text" name="ItemName" onChange={this.handleChange} value={this.state.ItemName} placeholder="Enter Name" />
                             </col>
                         </FormGroup>
                         <FormGroup row>
@@ -65,7 +69,7 @@ class AddItem extends React.Component {
                                 <button type="button" onClick={this.AddItem} className="btn btn-success">Submit</button>
                             </Col>
                             <Col sm={1}>
-                                <button color="danger">Candel</button>{' '}
+                                <button color="danger">Cancel</button>{' '}
                             </Col>
                             <Col sm={5}>
                             </Col>
@@ -75,8 +79,11 @@ class AddItem extends React.Component {
 
                 </Form>
             </Container>
+         
+
         );
     }
 }
 
-export default AddItem;
+//export default AddItem;
+//export { AddItem };

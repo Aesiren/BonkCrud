@@ -1,28 +1,29 @@
-﻿import React from 'react';
-import { Container, Col, Form, Row, FormGroup, Label, Input, Button } from 'reactstrap';
+﻿import React, { Component } from 'react';
+import { Container, Col, Form, /*Row,*/ FormGroup, Label, Input, Button } from 'reactstrap';
 import axios from 'axios';
 import '../AddItem.css'
 
-class Edit extends React.Componenet {
+export class EditItem extends Component { 
+    static displayName = EditItem.name;
     constructor(props) {
         super(props)
 
-        this.onChangeName = this.onChangeName.bind(this);
+        this.onChangeItemName = this.onChangeName.bind(this);
         this.onChangeDetail = this.onChangeDetail.bind(this);
         this.onChangeQuantity = this.onChangeQuantity.bind(this);
         //TODO: add owner
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            Name: '',
-            Description: '',
+            ItemName: '',
+            Detail: '',
             Quantity: ''
         }
 
     }
 
     componenetDidMount() {
-        axios.get('htpps://https://localhost:44435/Api/component/' + this.props.match.params.id)
+        axios.get('https://https://localhost:44435/components/DeleteItem' + this.props.match.params.id)
             .then(response => {
                 this.setState({
                     Name: response.data.Name,
@@ -62,7 +63,7 @@ class Edit extends React.Componenet {
             Description: this.state.Description,
             Quantity: this.state.Quantity
         };
-        axios.post('', obj)
+        axios.post('https://localhost:44435/Api/Controllers/DeleteItem/', obj)
             .then(res => console.log(res.data));
         debugger;
         this.props.history.push('/GetItem')
@@ -71,7 +72,7 @@ class Edit extends React.Componenet {
     render() {
         return (
             <Container className="App">
-
+                
                 <h4 classNAme="PageHeading">Update Item Information</h4>
                 <Form className="form" onSubmit={this.onSubmit}>
                     <Col>
@@ -110,9 +111,11 @@ class Edit extends React.Componenet {
                     </Col>
 
                 </Form>
+               
+               
             </Container>
         );
     }
 }
 
-export default Edit;
+//export default EditItem;

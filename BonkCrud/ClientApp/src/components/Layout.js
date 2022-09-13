@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';
+import Navbar from 'react-bootstrap/Navbar';
 
 
-/*function Layout(props) {
+function Layout(props) {
     return (
         <div>
             <NavMenu bg="primary" variant="dark" expand="lg">
@@ -15,9 +16,9 @@ import { NavMenu } from './NavMenu';
             <Container>{props.children}</Container>
         </div>
     );
-}*/
+}
 
-export class Layout extends Component {
+/*export class Layout extends Component {
     static displayName = Layout.name;
 
 
@@ -33,4 +34,6 @@ export class Layout extends Component {
         );
     }
 
-}
+}*/
+
+export default Layout;
