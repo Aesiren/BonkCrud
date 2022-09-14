@@ -1,4 +1,4 @@
-﻿import React, { Component } from 'react';
+﻿import React, { Component, Link } from 'react';
 import '../AddItem.css';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
@@ -8,20 +8,12 @@ import Table from './Table';
 export class GetItem extends Component {
     constructor(props) {
         super(props);
-        this.state = { items: [] };
+        this.state = { items: [], loading: true };
     }
 
     componentDidMount() {
         debugger;
-        getItemList()
-            .then(response => {
-                this.setState({ items: response.json() });
-                console.log(this.state.items.json());
-                debugger;
-            })
-            .catch(function (error) {
-                //console.log(error);
-            })
+        getItemList();
     }
 
     tabRow() {
@@ -57,13 +49,21 @@ export class GetItem extends Component {
 
 
 }
+
 async function getItemList() {
     console.log("Starting fetch");
-    let response = await fetch('API/Item/ItemList');
+    var responseClone;
+    let response = await axios.get("http://localhost:44435/Items/Index")
+    .then(response => {
+        return response;
+    });
     let data = await response.json();
     console.log("Fetch complete");
+    this.setState({ dbItem: data, loading: false })
     return data;
 }
+
+
    /* constructor() {
         super();
         this.state = { dbItems:[]};

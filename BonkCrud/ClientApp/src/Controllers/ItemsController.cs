@@ -18,11 +18,13 @@ using ValidateAntiForgeryTokenAttribute = Microsoft.AspNetCore.Mvc.ValidateAntiF
 using BindAttribute = Microsoft.AspNetCore.Mvc.BindAttribute;
 using SelectList = Microsoft.AspNetCore.Mvc.Rendering.SelectList;
 using NuGet.Protocol;
+using ControllerBase = Microsoft.AspNetCore.Mvc.ControllerBase;
 
 namespace BonkCrud.Controllers
 {
+    [ApiController]
+    //[Route("[controller]")]
     
-    [RoutePrefix("ItemCMD")]
 
     public class ItemsController : Controller
     {
@@ -34,20 +36,36 @@ namespace BonkCrud.Controllers
             _context = context;
         }
 
-        // GET: Items
-      
         [Route("ItemList")]
         [HttpGet]
+        public object ItemList()
+        {
+            return _context.Items;
+        }
+
+        [HttpGet]
+        public IEnumerable<Item> Get()
+        {
+            Console.Write("ItemList has been called");
+            var crudContext = _context.Items.Include(i => i.User);
+            object toList = crudContext.ToList();
+            return (IEnumerable<Item>)Enumerable.ToArray(crudContext.ToList());
+        }
+
+        // GET: Items
+
+        [Route("Items")]
+        [Route("Items/ItemList")]
+        [HttpGet("ItemList")]
         public async Task<IActionResult> Index()
         {
             Console.Write("ItemList has been called");
             var crudContext = _context.Items.Include(i => i.User);
-            //object toList = await crudContext.ToListAsync();
+            object toList = await crudContext.ToListAsync();
             //return TableBase(await crudContext.ToListAsync());
             Console.Write("ItemList Done");
+            //return (IActionResult)toList;
             return View(await crudContext.ToListAsync());
-
-           // return (IActionResult)toList;
             
         }
 

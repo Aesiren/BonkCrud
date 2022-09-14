@@ -34,8 +34,8 @@ export default class App extends Component {
                 <Route path='/components' component={AddItem} />
                 <Route path='/components' component={EditItem} />
                 <Route path='/components' component={GetItem} />
-            </Layout>);*/
-       /* return (
+            </Layout>);
+        return (
             <Router>
                 <div className="container">
                     <nav classname="navbar navbar-expand-lg navheader">
@@ -72,9 +72,9 @@ export default class App extends Component {
         );
        // return (
             
-        //);*/
-    }
-//}
+        //);
+    }*/
+}
 
 
 
