@@ -12,12 +12,12 @@ import reportWebVitals from './reportWebVitals';
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
-/*
+
 ReactDOM.render(
     <BrowserRouter >
         <App />
     </BrowserRouter>, document.getElementById('root')
-);*/
+);
 
 
 

@@ -1,6 +1,7 @@
 import { AddItem } from "./components/AddItem";
 import { EditItem } from "./components/EditItem";
 import { GetItem } from "./components/GetItem";
+//import { ItemCMD } from "./Controllers/ItemsController"
 //import { AddUser } from "./components/AddUser";
 //import { GetUser } from "./components/GetUser";
 //import { EditUser } from "./components/EditUser";
@@ -12,12 +13,18 @@ const AppRoutes = [
   {
     index: true,
     element: <Home />
-  },
+    },
+   /* {
+        path: '/ItemCMD/',
+        element: <ItemsController />
+    },*/
   {
     path: '/counter',
     element: <Counter />
   },
-  {
+
+
+    {
     path: '/fetch-data',
     element: <FetchData />
     },
