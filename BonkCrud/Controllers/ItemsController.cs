@@ -1,42 +1,70 @@
 ﻿using BonkCrud.Data;
+using System.Net;
 using BonkCrud.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using System.Web.Http;
 using ActionNameAttribute = Microsoft.AspNetCore.Mvc.ActionNameAttribute;
 using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
-//using System.Web.Http;
-
+using Microsoft.AspNetCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.ObjectPool;
+using System.Web.Mvc;
+using Controller = Microsoft.AspNetCore.Mvc.Controller;
+using ValidateAntiForgeryTokenAttribute = Microsoft.AspNetCore.Mvc.ValidateAntiForgeryTokenAttribute;
+using BindAttribute = Microsoft.AspNetCore.Mvc.BindAttribute;
+using SelectList = Microsoft.AspNetCore.Mvc.Rendering.SelectList;
+using NuGet.Protocol;
 
 namespace BonkCrud.Controllers
 {
-    [RoutePrefix("API/Item")]
+    
+    [RoutePrefix("ItemCMD")]
+
     public class ItemsController : Controller
     {
+        
         private readonly crudContext _context;
-
+        //crudContext localDB = new crudContext();
         public ItemsController(crudContext context)
         {
             _context = context;
         }
 
         // GET: Items
-    
+      
+        [Route("ItemList")]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
+            Console.Write("ItemList has been called");
             var crudContext = _context.Items.Include(i => i.User);
+            //object toList = await crudContext.ToListAsync();
+            //return TableBase(await crudContext.ToListAsync());
+            Console.Write("ItemList Done");
             return View(await crudContext.ToListAsync());
+
+           // return (IActionResult)toList;
+            
         }
 
+    
+
+        //crudContext localDB = new crudContext();
+
+
+
+
+
         // GET: Items/Details/5
+        [Route("ItemDetails")]
         [HttpGet]
-        [Route("/ItemDetails")]
         public async Task<IActionResult> Details(int? id)
         {
+            Console.Write("ItemDetails runs");
             if (id == null || _context.Items == null)
             {
                 return NotFound();
@@ -51,12 +79,14 @@ namespace BonkCrud.Controllers
             }
 
             return View(item);
+            
         }
 
+        [Route("CreateItem")]
         // GET: Items/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
+            ViewData["UserId"] = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_context.Users, "UserId", "UserId");
             return View();
         }
 

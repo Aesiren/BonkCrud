@@ -19,7 +19,10 @@ class Table extends Component {
         return (
             <tr>
                 <td>
-                    {this.props.obj.Name}
+                    {this.props.obj.ItemId}
+                </td>
+                <td>
+                    {this.props.obj.ItemName}
                 </td>
                 <td>
                     {this.props.obj.Detail}
